@@ -1,0 +1,4 @@
+# Project exclude paths
+/dblib/target/
+/device-app/target/
+/dto/target/
