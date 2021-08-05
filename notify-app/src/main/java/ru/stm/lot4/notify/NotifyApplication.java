@@ -1,4 +1,4 @@
-package ru.stm.lot4.device;
+package ru.stm.lot4.notify;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,9 +10,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = "ru.stm.lot4")
 @EntityScan("ru.stm.lot4.db.model")
 @EnableJpaRepositories("ru.stm.lot4.db.repository")
-public class DeviceApplication {
+public class NotifyApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DeviceApplication.class);
+        SpringApplication.run(NotifyApplication.class);
     }
 }

@@ -1,6 +1,5 @@
 package ru.stm.lot4.device.service;
 
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.stm.lot4.db.model.Phone;
