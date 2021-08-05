@@ -29,7 +29,7 @@
       <lombok.version>1.18.10</lombok.version>
       <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
   </properties>
-  <dependencyManagement>
+
      <dependencies>
         <dependency>
           <groupId>org.springframework.boot</groupId>
@@ -53,5 +53,5 @@
              <version>5.3.9</version>
          </dependency>
      </dependencies>
-  </dependencyManagement>
+
 </project>

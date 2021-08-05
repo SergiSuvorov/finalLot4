@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -16,6 +17,7 @@ import ru.stm.lot4.dto.model.PushNotificationRequest;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class SenderServiceImpl {
     private final KafkaTemplate<Long, PushNotificationRequest> senderKafka;
     private final PushNotificationMapper mapper;
@@ -30,10 +32,10 @@ public class SenderServiceImpl {
             logMessage.write(notification.toString() + '\n');
             logMessage.write("Phone list" + '\n');
             logMessage.write(request.getPhoneNumbers().toString());
-            logMessage.close();
         }
         catch (IOException e){
-            e.printStackTrace();
+            log.error(e.toString());
+            //e.printStackTrace();
         }
 
     }
