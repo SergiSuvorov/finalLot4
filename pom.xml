@@ -13,6 +13,8 @@
       <module>device-app</module>
       <module>dto</module>
       <module>notify-app</module>
+      <module>receiver-app</module>
+      <module>sender-app</module>
   </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

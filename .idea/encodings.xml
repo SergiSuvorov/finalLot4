@@ -5,6 +5,8 @@
     <file url="file://$PROJECT_DIR$/device-app/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dto/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/notify-app/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/receiver-app/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/sender-app/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

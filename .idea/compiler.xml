@@ -8,8 +8,10 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="dblib" />
-        <module name="device-app" />
+        <module name="sender-app" />
         <module name="notify-app" />
+        <module name="receiver-app" />
+        <module name="device-app" />
       </profile>
       <profile name="Annotation profile for finalLot4" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -30,6 +32,8 @@
       <module name="device-app" options="-parameters" />
       <module name="dto" options="-parameters -parameters" />
       <module name="notify-app" options="-parameters" />
+      <module name="receiver-app" options="-parameters" />
+      <module name="sender-app" options="-parameters" />
     </option>
   </component>
 </project>
