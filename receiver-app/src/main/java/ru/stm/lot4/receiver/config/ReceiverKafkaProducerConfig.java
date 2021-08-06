@@ -1,4 +1,4 @@
-package ru.stm.lot4.notify.config;
+package ru.stm.lot4.receiver.config;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,9 +12,10 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.converter.StringJsonMessageConverter;
 import org.springframework.kafka.support.serializer.JsonSerializer;
-import ru.stm.lot4.dto.model.PushNotificationRequest;
+import ru.stm.lot4.db.model.PushNotification;
+
 @Configuration
-public class NotifyKafkaConsumerConfig {
+public class ReceiverKafkaProducerConfig {
     @Value("${kafka.server}")
     private String kafkaServer;
 
@@ -31,12 +32,12 @@ public class NotifyKafkaConsumerConfig {
         return props;
     }
     @Bean
-    public ProducerFactory<Long, PushNotificationRequest> producerNotifyFactory(){
+    public ProducerFactory<Long, PushNotification> producerNotifyFactory(){
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
     @Bean
-    public KafkaTemplate<Long,PushNotificationRequest> kafkaTemplate(){
-        KafkaTemplate<Long,PushNotificationRequest> template = new KafkaTemplate<>(producerNotifyFactory());
+    public KafkaTemplate<Long,PushNotification> kafkaTemplate(){
+        KafkaTemplate<Long,PushNotification> template = new KafkaTemplate<>(producerNotifyFactory());
         template.setMessageConverter(new StringJsonMessageConverter());
         return template;
     }

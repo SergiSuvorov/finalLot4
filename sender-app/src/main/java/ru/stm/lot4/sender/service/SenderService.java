@@ -1,5 +1,9 @@
 package ru.stm.lot4.sender.service;
 
-public interface SenderService {
+import org.springframework.stereotype.Service;
+import ru.stm.lot4.db.model.PushNotification;
 
+@Service
+public interface SenderService {
+    void writeMessage(PushNotification request);
 }

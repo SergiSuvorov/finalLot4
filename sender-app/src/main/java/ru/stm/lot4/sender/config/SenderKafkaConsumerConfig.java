@@ -21,10 +21,8 @@ public class SenderKafkaConsumerConfig {
 
     @Value("${kafka.server}")
     private String kafkaServer;
-
     @Value("${kafka.group.id}")
     private String kafkaGroupId;
-
 
     @Bean
     public KafkaListenerContainerFactory<?> batchFactory() {
@@ -65,7 +63,6 @@ public class SenderKafkaConsumerConfig {
     @Bean
     public StringJsonMessageConverter converter() {
         return new StringJsonMessageConverter();
-
     }
 }
 

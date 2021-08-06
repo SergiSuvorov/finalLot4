@@ -9,8 +9,9 @@ import ru.stm.lot4.dto.model.PushNotificationRequest;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PushNotificationMapper {
+
     PushNotification toEntity(PushNotificationDTO dto);
     PushNotificationDTO toDTO(PushNotification notification);
-    //@Mapping(source = "phoneNumbers", target = "phoneNumbers", ignore = true)
+    @Mapping(source = "phoneNumbers", target = "phones", ignore = true)
     PushNotification fromRequest(PushNotificationRequest request);
 }

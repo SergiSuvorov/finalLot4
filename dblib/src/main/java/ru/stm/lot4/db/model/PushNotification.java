@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,9 @@ public class PushNotification {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NonNull
     private long id;
+    @NotBlank
     private String title;
+    @NotBlank
     private String body;
     private LocalDateTime date;
     @Column(name="is_active")

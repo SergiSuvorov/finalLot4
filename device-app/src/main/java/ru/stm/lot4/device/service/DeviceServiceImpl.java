@@ -9,8 +9,10 @@ import ru.stm.lot4.dto.model.PhoneDTO;
 @Service
 @RequiredArgsConstructor
 public class DeviceServiceImpl implements DeviceService{
+
     private final PhoneMapper phoneMapper;
     private final PhoneRepository phoneRepo;
+
     @Override
     public Phone createNewPhone(PhoneDTO phoneDTO) {
         Phone phone= phoneMapper.toEntity(phoneDTO);
@@ -30,13 +32,11 @@ public class DeviceServiceImpl implements DeviceService{
 
     @Override
     public Phone deactivatePhone(long id) {
-        Phone phone = phoneRepo.findById(id)
+
+        return phoneRepo.findById(id)
+                .map(phone1 -> phone1.setActive(false))
+                .map(phoneRepo::save)
                 .orElse(null);
-        if (phone==null) {
-            return null;
-        }
-        phone.setActive(false);
-        return this.phoneRepo.save(phone);
     }
 }
 

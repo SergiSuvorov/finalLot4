@@ -36,7 +36,4 @@ public class Phone {
     @ManyToOne(targetEntity = Application.class)
     @JoinColumn(name = "mobile_application_id")
     private Application application;
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "push_notification_id")
-//    private List<PushNotification> notifications;
 }

@@ -7,6 +7,7 @@ import ru.stm.lot4.dto.model.PhoneDTO;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface PhoneMapper {
+
     PhoneDTO toDTO(Phone phone);
     Phone toEntity(PhoneDTO phoneDTO);
 }
