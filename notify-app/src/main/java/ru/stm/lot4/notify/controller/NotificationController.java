@@ -22,7 +22,8 @@ public class NotificationController {
     private final NotificationService kafkaService;
 
     @PostMapping("/create")
-    public ResponseEntity<PushNotification> createNotification(@Valid @RequestBody PushNotificationRequest notificationRequest){
+    public ResponseEntity<PushNotification> createNotification(
+            @Valid @RequestBody PushNotificationRequest notificationRequest) {
         kafkaService.send(notificationRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }

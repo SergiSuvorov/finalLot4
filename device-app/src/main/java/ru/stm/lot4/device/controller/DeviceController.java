@@ -25,30 +25,30 @@ public class DeviceController {
     private final DeviceService deviceService;
 
     @PostMapping
-    public ResponseEntity<Phone> createNewPhone(@Valid @RequestBody PhoneDTO phoneDTO){
+    public ResponseEntity<Phone> createNewPhone(@Valid @RequestBody PhoneDTO phoneDTO) {
         Phone newPhone = deviceService.createNewPhone(phoneDTO);
-        if(newPhone==null){
+        if (newPhone == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(newPhone,HttpStatus.OK);
+        return new ResponseEntity<>(newPhone, HttpStatus.OK);
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<Phone> deleteCurrentPhone(@PathVariable("id") long id){
+    public ResponseEntity<Phone> deleteCurrentPhone(@PathVariable("id") long id) {
         Phone toDeletePhone = deviceService.getPhoneById(id);
-        if (toDeletePhone==null){
+        if (toDeletePhone == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         deviceService.deletePhone(toDeletePhone);
-        return new ResponseEntity<>(toDeletePhone,HttpStatus.OK);
+        return new ResponseEntity<>(toDeletePhone, HttpStatus.OK);
     }
 
     @PutMapping("{id}/deactivate")
-    public ResponseEntity<Phone> deactivatePhone(@PathVariable("id") long id){
+    public ResponseEntity<Phone> deactivatePhone(@PathVariable("id") long id) {
         Phone currPhone = deviceService.deactivatePhone(id);
-        if(currPhone==null){
+        if (currPhone == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(currPhone,HttpStatus.OK);
+        return new ResponseEntity<>(currPhone, HttpStatus.OK);
     }
 }

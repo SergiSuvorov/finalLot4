@@ -16,6 +16,7 @@ import ru.stm.lot4.db.model.PushNotification;
 
 @Configuration
 public class ReceiverKafkaProducerConfig {
+
     @Value("${kafka.server}")
     private String kafkaServer;
 
@@ -23,21 +24,24 @@ public class ReceiverKafkaProducerConfig {
     private String kafkaProducerId;
 
     @Bean
-    public Map<String,Object> producerConfig(){
-        Map<String,Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,kafkaServer);
+    public Map<String, Object> producerConfig() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         props.put(ProducerConfig.CLIENT_ID_CONFIG, kafkaProducerId);
         return props;
     }
+
     @Bean
-    public ProducerFactory<Long, PushNotification> producerNotifyFactory(){
+    public ProducerFactory<Long, PushNotification> producerNotifyFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
+
     @Bean
-    public KafkaTemplate<Long,PushNotification> kafkaTemplate(){
-        KafkaTemplate<Long,PushNotification> template = new KafkaTemplate<>(producerNotifyFactory());
+    public KafkaTemplate<Long, PushNotification> kafkaTemplate() {
+        KafkaTemplate<Long, PushNotification> template = new KafkaTemplate<>(
+                producerNotifyFactory());
         template.setMessageConverter(new StringJsonMessageConverter());
         return template;
     }

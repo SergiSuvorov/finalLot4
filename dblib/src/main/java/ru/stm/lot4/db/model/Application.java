@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Application {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

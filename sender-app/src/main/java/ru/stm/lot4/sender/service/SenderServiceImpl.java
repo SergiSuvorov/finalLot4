@@ -16,21 +16,21 @@ import ru.stm.lot4.dto.model.PushNotificationRequest;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class SenderServiceImpl implements SenderService{
+public class SenderServiceImpl implements SenderService {
 
     private final KafkaTemplate<Long, PushNotificationRequest> senderKafka;
     private final PushNotificationMapper mapper;
-    @Value("${MessageDir}")
-    private String MessageDir;
-    @KafkaListener(topics = "messages",groupId = "messageGroup ")
+    @Value("${messageDir}")
+    private String messageDir;
+
+    @KafkaListener(topics = "messages", groupId = "messageGroup ")
     public void writeMessage(PushNotification pushNotification) {
-        try(FileWriter logMessage = new FileWriter(MessageDir + pushNotification.getTitle() +
-                "_" + UUID.randomUUID())){
+        try (FileWriter logMessage = new FileWriter(messageDir + pushNotification.getTitle() +
+                "_" + UUID.randomUUID())) {
             logMessage.write("push_notification" + '\n');
             logMessage.write(pushNotification.toString() + '\n');
-        }
-        catch (IOException e){
-            log.error(e.toString());
+        } catch (IOException e) {
+            log.error("ошибка записи в файл: " + e);
         }
     }
 }

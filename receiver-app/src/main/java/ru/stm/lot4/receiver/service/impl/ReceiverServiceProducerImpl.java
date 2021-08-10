@@ -19,15 +19,15 @@ public class ReceiverServiceProducerImpl implements ReceiverServiceProducer {
     private final KafkaTemplate<Long, PushNotification> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
-
     @Override
     public void send(PushNotification pushNotification) {
-        log.info("<=sending {}",writeValueAsString(pushNotification));
+        log.info("<=sending {}", writeValueAsString(pushNotification));
         ListenableFuture<SendResult<Long, PushNotification>> future =
-                kafkaTemplate.send("messages",pushNotification);
-        future.addCallback(System.out::println,System.err::println);
+                kafkaTemplate.send("messages", pushNotification);
+        future.addCallback(System.out::println, System.err::println);
         kafkaTemplate.flush();
     }
+
     private String writeValueAsString(PushNotification dto) {
         try {
             return objectMapper.writeValueAsString(dto);

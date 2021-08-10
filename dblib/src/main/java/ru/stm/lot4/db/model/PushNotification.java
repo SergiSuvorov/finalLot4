@@ -23,6 +23,7 @@ import lombok.experimental.Accessors;
 @NoArgsConstructor
 @Accessors(chain = true)
 public class PushNotification {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NonNull
@@ -32,9 +33,9 @@ public class PushNotification {
     @NotBlank
     private String body;
     private LocalDateTime date;
-    @Column(name="is_active")
+    @Column(name = "is_active")
     private boolean active;
-    @ManyToMany(targetEntity = Phone.class,fetch = FetchType.LAZY)
+    @ManyToMany(targetEntity = Phone.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "phones")
     private List<Phone> phones;
 }

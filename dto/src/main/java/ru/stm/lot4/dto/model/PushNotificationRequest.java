@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PushNotificationRequest {
+
     private String title;
     private String body;
     private boolean active;

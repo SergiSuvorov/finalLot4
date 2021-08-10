@@ -23,21 +23,24 @@ public class NotifyKafkaProducerConfig {
     private String kafkaProducerId;
 
     @Bean
-    public Map<String,Object> producerConfig(){
-        Map<String,Object> props = new HashMap<>();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,kafkaServer);
+    public Map<String, Object> producerConfig() {
+        Map<String, Object> props = new HashMap<>();
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, LongSerializer.class);
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, JsonSerializer.class);
         props.put(ProducerConfig.CLIENT_ID_CONFIG, kafkaProducerId);
         return props;
     }
+
     @Bean
-    public ProducerFactory<Long, PushNotificationRequest> producerNotifyFactory(){
+    public ProducerFactory<Long, PushNotificationRequest> producerNotifyFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfig());
     }
+
     @Bean
-    public KafkaTemplate<Long,PushNotificationRequest> kafkaTemplate(){
-        KafkaTemplate<Long,PushNotificationRequest> template = new KafkaTemplate<>(producerNotifyFactory());
+    public KafkaTemplate<Long, PushNotificationRequest> kafkaTemplate() {
+        KafkaTemplate<Long, PushNotificationRequest> template = new KafkaTemplate<>(
+                producerNotifyFactory());
         template.setMessageConverter(new StringJsonMessageConverter());
         return template;
     }

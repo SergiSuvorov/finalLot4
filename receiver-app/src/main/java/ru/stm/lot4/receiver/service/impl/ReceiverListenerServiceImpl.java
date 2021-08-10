@@ -12,19 +12,19 @@ import ru.stm.lot4.db.repository.PhoneRepository;
 import ru.stm.lot4.db.repository.PushNotificationRepository;
 import ru.stm.lot4.dto.mappers.PushNotificationMapper;
 import ru.stm.lot4.dto.model.PushNotificationRequest;
-import ru.stm.lot4.receiver.service.ReceiverService;
+import ru.stm.lot4.receiver.service.ReceiverListenerService;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class ReceiverServiceImpl implements ReceiverService {
+public class ReceiverListenerServiceImpl implements ReceiverListenerService {
 
     private final PushNotificationRepository notifyRepo;
     private final PushNotificationMapper mapper;
     private final PhoneRepository phoneRepo;
 
     @Override
-    @KafkaListener(topics = "receiver_notification",containerFactory = "singleFactory")
+    @KafkaListener(topics = "receiver_notification", containerFactory = "singleFactory")
     public void consume(PushNotificationRequest request) {
         log.info("=> consumed {}", request.toString());
         PushNotification pushNotification = mapper.fromRequest(request);
@@ -32,13 +32,12 @@ public class ReceiverServiceImpl implements ReceiverService {
                 .stream()
                 .distinct()
                 .map(phoneRepo::findByNumber)
-                .map(phone -> phone.orElse(null))
+                .filter(phone -> phone.isPresent())
+                .map(phone -> phone.get())
                 .collect(Collectors.toList());
+
+        pushNotification.setPhones(phones);
         PushNotification newNotification = notifyRepo.save(pushNotification);
-        newNotification.setPhones(phones);
-        if(newNotification==null){
-            log.error("fail create push notification " + pushNotification.toString());
-        }
-        log.info("created new notification " + newNotification.toString());
+        log.info("created new notification " + newNotification);
     }
 }

@@ -9,5 +9,6 @@ import ru.stm.lot4.dto.model.PhoneDTO;
 public interface PhoneMapper {
 
     PhoneDTO toDTO(Phone phone);
+
     Phone toEntity(PhoneDTO phoneDTO);
 }

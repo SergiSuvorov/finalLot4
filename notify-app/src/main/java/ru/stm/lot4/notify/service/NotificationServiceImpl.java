@@ -9,21 +9,22 @@ import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import ru.stm.lot4.dto.model.PushNotificationRequest;
+import ru.stm.lot4.notify.exception.ConvertException;
 
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class NotificationServiceImpl implements NotificationService{
+public class NotificationServiceImpl implements NotificationService {
 
-    private final KafkaTemplate<Long,PushNotificationRequest> kafkaTemplate;
+    private final KafkaTemplate<Long, PushNotificationRequest> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
     @Override
     public void send(PushNotificationRequest notification) {
-        log.info("<=sending {}",writeValueAsString(notification));
+        log.info("<=sending {}", writeValueAsString(notification));
         ListenableFuture<SendResult<Long, PushNotificationRequest>> future =
-                kafkaTemplate.send("receiver_notification",notification);
-        future.addCallback(System.out::println,System.err::println);
+                kafkaTemplate.send("receiver_notification", notification);
+        future.addCallback(System.out::println, System.err::println);
         kafkaTemplate.flush();
     }
 
@@ -31,8 +32,8 @@ public class NotificationServiceImpl implements NotificationService{
         try {
             return objectMapper.writeValueAsString(dto);
         } catch (JsonProcessingException e) {
-            log.error(e.toString());
-            throw new RuntimeException("Writing value to JSON failed: " + dto.toString());
+            log.error("Ошибка форматирования " + e);
+            throw new ConvertException("Writing value to JSON failed: " + dto.toString());
         }
     }
 }
