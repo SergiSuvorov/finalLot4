@@ -1,6 +1,7 @@
 package ru.stm.lot4.device.controller;
 
 import javax.validation.Valid;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

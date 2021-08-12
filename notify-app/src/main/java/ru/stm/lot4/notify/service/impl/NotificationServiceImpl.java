@@ -1,4 +1,4 @@
-package ru.stm.lot4.notify.service;
+package ru.stm.lot4.notify.service.impl;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import ru.stm.lot4.dto.model.PushNotificationRequest;
 import ru.stm.lot4.notify.exception.ConvertException;
+import ru.stm.lot4.notify.service.NotificationService;
 
 @Slf4j
 @Service
@@ -32,7 +33,7 @@ public class NotificationServiceImpl implements NotificationService {
         try {
             return objectMapper.writeValueAsString(dto);
         } catch (JsonProcessingException e) {
-            log.error("Ошибка форматирования " + e);
+            log.error("Ошибка форматирования ",e);
             throw new ConvertException("Writing value to JSON failed: " + dto.toString());
         }
     }

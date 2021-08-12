@@ -1,10 +1,11 @@
-package ru.stm.lot4.device.service;
+package ru.stm.lot4.device.service.impl;
 
 import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.stm.lot4.db.model.Phone;
 import ru.stm.lot4.db.repository.PhoneRepository;
+import ru.stm.lot4.device.service.DeviceService;
 import ru.stm.lot4.dto.mappers.PhoneMapper;
 import ru.stm.lot4.dto.model.PhoneDTO;
 

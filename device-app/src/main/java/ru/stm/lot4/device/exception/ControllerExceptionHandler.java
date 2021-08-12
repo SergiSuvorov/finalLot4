@@ -1,4 +1,4 @@
-package ru.stm.lot4.device.Exception;
+package ru.stm.lot4.device.exception;
 
 import java.util.List;
 import java.util.stream.Collectors;

@@ -14,7 +14,7 @@ import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.support.converter.BatchMessagingMessageConverter;
 import org.springframework.kafka.support.converter.StringJsonMessageConverter;
-import ru.stm.lot4.dto.model.PushNotificationRequest;
+import ru.stm.lot4.db.model.PushNotification;
 
 @Configuration
 public class SenderKafkaConsumerConfig {
@@ -24,9 +24,10 @@ public class SenderKafkaConsumerConfig {
     @Value("${kafka.group.id}")
     private String kafkaGroupId;
 
+
     @Bean
     public KafkaListenerContainerFactory<?> batchFactory() {
-        ConcurrentKafkaListenerContainerFactory<Long, PushNotificationRequest> factory =
+        ConcurrentKafkaListenerContainerFactory<Long, PushNotification> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         factory.setBatchListener(true);
@@ -36,7 +37,7 @@ public class SenderKafkaConsumerConfig {
 
     @Bean
     public KafkaListenerContainerFactory<?> singleFactory() {
-        ConcurrentKafkaListenerContainerFactory<Long, PushNotificationRequest> factory =
+        ConcurrentKafkaListenerContainerFactory<Long, PushNotification> factory =
                 new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         factory.setBatchListener(false);
@@ -45,7 +46,7 @@ public class SenderKafkaConsumerConfig {
     }
 
     @Bean
-    public ConsumerFactory<Long, PushNotificationRequest> consumerFactory() {
+    public ConsumerFactory<Long, PushNotification> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
     }
 
@@ -64,6 +65,7 @@ public class SenderKafkaConsumerConfig {
     public StringJsonMessageConverter converter() {
         return new StringJsonMessageConverter();
     }
+
 }
 
 
