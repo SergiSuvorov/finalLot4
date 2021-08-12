@@ -23,7 +23,8 @@ public class SenderKafkaConsumerConfig {
     private String kafkaServer;
     @Value("${kafka.group.id}")
     private String kafkaGroupId;
-
+    @Value("${countThread}")
+    int countThread;
 
     @Bean
     public KafkaListenerContainerFactory<?> batchFactory() {
@@ -32,6 +33,7 @@ public class SenderKafkaConsumerConfig {
         factory.setConsumerFactory(consumerFactory());
         factory.setBatchListener(true);
         factory.setMessageConverter(new BatchMessagingMessageConverter(converter()));
+        factory.setConcurrency(countThread);
         return factory;
     }
 
@@ -42,6 +44,7 @@ public class SenderKafkaConsumerConfig {
         factory.setConsumerFactory(consumerFactory());
         factory.setBatchListener(false);
         factory.setMessageConverter(new StringJsonMessageConverter());
+        factory.setConcurrency(countThread);
         return factory;
     }
 

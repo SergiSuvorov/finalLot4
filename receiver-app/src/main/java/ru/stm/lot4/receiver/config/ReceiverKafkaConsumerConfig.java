@@ -32,6 +32,7 @@ public class ReceiverKafkaConsumerConfig {
         factory.setConsumerFactory(consumerFactory());
         factory.setBatchListener(true);
         factory.setMessageConverter(new BatchMessagingMessageConverter(converter()));
+        factory.setConcurrency(4);
         return factory;
     }
 
@@ -42,6 +43,7 @@ public class ReceiverKafkaConsumerConfig {
         factory.setConsumerFactory(consumerFactory());
         factory.setBatchListener(false);
         factory.setMessageConverter(new StringJsonMessageConverter());
+        factory.setConcurrency(4);
         return factory;
     }
 
